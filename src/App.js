@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -90,16 +90,20 @@ class App extends Component {
     if (this.state.persons.length <= 1) classes.push('bold');
 
     return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>Mi estringsita :P</p>
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle persons</button>
-          
+      <StyleRoot>
+
+        <div className="App">
+          <h1>Hi, I'm a React App</h1>
+          <p className={classes.join(' ')}>Mi estringsita :P</p>
+          <button 
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle persons</button>
+            
           {persons}
 
-      </div>
+        </div>
+
+      </StyleRoot>
     );
   }
 }
