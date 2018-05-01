@@ -13,8 +13,6 @@ class ErrorBoundary extends Component {
       hasError: true, errorMessage: error,
     });
 
-
-
   }
 
   render() {

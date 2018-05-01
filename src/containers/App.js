@@ -6,12 +6,21 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
-  state = {
-    persons: [
-      { id: 1, name: "Marcos", age: 21 },
-      { id: 2, name: "Diego", age: 22 },
-      { id: 3, name: "Brandon", age: 21 }
-    ]
+  constructor() {
+    super();
+
+    this.state = {
+      persons: [
+        { id: 1, name: "Marcos", age: 21 },
+        { id: 2, name: "Diego", age: 22 },
+        { id: 3, name: "Brandon", age: 21 }
+      ],
+      showPersons: false,
+    }
+  }
+
+  componentWillMount() {
+
   }
 
   nameChangedHandler = (id, event) => {
