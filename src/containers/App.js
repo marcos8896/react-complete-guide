@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+
+export const AuthContext = React.createContext(false);
 
 class App extends Component {
 
@@ -16,6 +19,8 @@ class App extends Component {
         { id: 3, name: "Brandon", age: 21 }
       ],
       showPersons: false,
+      toggleClicked: 0,
+      authenticated: false,
     }
   }
 
@@ -47,8 +52,16 @@ class App extends Component {
 
   }
 
-  togglePersonsHandler = () => this.setState({ showPersons: !this.state.showPersons });
+  togglePersonsHandler = () => this.setState((prevState, props) => {
+    return { 
+      showPersons: !prevState.showPersons,
+      toggleClicked: prevState.toggleClicked + 1,
+     }
+  });
 
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  }
 
   render() {
 
@@ -69,15 +82,19 @@ class App extends Component {
 
     return (
 
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <Cockpit
+          login={this.loginHandler}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
         />
-        {persons}
 
-      </div>
+        <AuthContext.Provider value={this.state.authenticated}>
+          {persons}
+        </AuthContext.Provider>
+
+      </WithClass>
 
     );
   }
